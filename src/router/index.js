@@ -1,6 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import Informative from '../views/site/InformativeManagerPage.vue';
+import MedicalRecords from '../views/site/MedicalRecordsManagerPage.vue';
+import HealthAgent from '../views/site/HealthAgentManagerPage.vue';
+import Register from '../views/site/RegisterPage.vue';
+import Login from '../views/site/LoginPage.vue';
 
 Vue.use(VueRouter);
 
@@ -11,12 +16,34 @@ const routes = [
     component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/informative',
+    name: 'Informative',
+    component: Informative,
+  },
+  {
+    path: '/user',
+    name: 'MedicalRecords',
+    component: MedicalRecords,
+  },
+  {
+    path: '/health-agent',
+    name: 'HealthAgent',
+    component: HealthAgent,
+  },
+  {
+    path: '/privacy',
+    name: 'Privacy',
+    component: () => import('../views/site/PrivacyPage.vue'),
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
 ];
 
