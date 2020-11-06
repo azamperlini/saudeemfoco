@@ -4,38 +4,40 @@
       <div class="bar"></div>
       <div class="loginBrand">
         <router-link to="/">
-          <img class="linkBrand" alt="Link Home" src="../../assets/login/brandLogin.png">
+          <img class="linkBrand" alt="Link Home" src="../../assets/login/brandLogin.png" />
         </router-link>
         <h3>O Portal da Saúde Universitária.</h3>
         <div class="content-formLogin">
           <form class="formLogin" @submit.prevent="makeLogin">
-            <img alt="Icone usuário" src="../../assets/login/iconLogin.png"><br>
+            <img alt="Icone usuário" src="../../assets/login/iconLogin.png" /><br />
             <div class="inputBox">
               <input
                 type="text"
-                required="" oninvalid="setCustomValidity('Campo Obrigatório')"
+                required=""
+                oninvalid="setCustomValidity('Campo Obrigatório')"
                 oninput="setCustomValidity('')"
                 v-model="user.userName"
-              >
+              />
               <label>Username:</label>
             </div>
             <div class="inputBox">
               <input
                 type="password"
                 pattern=".{6,}"
-                required="" oninvalid="setCustomValidity('Campo Obrigatório.')"
+                required=""
+                oninvalid="setCustomValidity('Campo Obrigatório.')"
                 oninput="setCustomValidity('')"
                 v-model="user.password"
-              >
+              />
               <label>Senha:</label>
             </div>
             <p class="confirmUser" v-if="checkLogin">(Usuário ou Senha não confere!)</p>
-            <button type="submit">Entrar</button><br>
+            <button type="submit">Entrar</button><br />
           </form>
           <p><router-link to="#">Esqueceu a senha</router-link>?</p>
           <p>Não tenho conta ainda. <router-link to="/register"> Criar conta</router-link>.</p>
           <div class="brandPartner">
-            <img alt="Icone Parceiro" src="../../assets/login/brandPartner.png">
+            <img alt="Icone Parceiro" src="../../assets/login/brandPartner.png" />
           </div>
         </div>
       </div>
@@ -45,42 +47,51 @@
 </template>
 
 <script>
-
 export default {
   name: 'Login',
   data() {
     return {
       user: {},
       checkLogin: false,
+      token: ''
     };
   },
-  components: {
-  },
+  components: {},
   methods: {
     makeLogin() {
       const url = '/login';
-      this.$http.post(url, this.user)
-        .then((response) => {
-          console.log(response.data);
-          localStorage.setItem('token', response.data.access_token);
-          this.$router.push({ name: 'MedicalRecords' });
-        }).catch((error) => {
+      const urlSecondary = '/username';
+      this.$http
+        .post(url, this.user)
+        .then(response => {
+          this.token = response.headers.authorization;
+          console.log(response.headers.authorization);
+        })
+        .catch(error => {
           if (error) {
             this.checkLogin = true;
           } else {
             this.checkLogin = false;
           }
         });
-    },
+      this.$http
+        .get(urlSecondary)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          if (error) {
+            console.log(error);
+          }
+        });
+      this.$router.push({ name: 'MedicalRecords' });
+    }
   },
-  computed: {
-
-  },
+  computed: {}
 };
 </script>
 
 <style scoped>
-
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -128,13 +139,14 @@ h3 {
   width: 38%;
   background-color: white;
   padding: 45px 45px 0 45px;
-  border: 2px solid  #92cd01;
+  border: 2px solid #92cd01;
   border-radius: 30px;
   box-shadow: var(--shadow-box-shadow);
   text-align: center;
 }
 
-.content-formLogin p, a {
+.content-formLogin p,
+a {
   margin: 25px 0;
   color: var(--txtblack70-color);
 }
@@ -164,24 +176,25 @@ h3 {
   margin: 0 34%;
 }
 
-.inputBox{
-    margin: 16px 0;
-    position: relative;
+.inputBox {
+  margin: 16px 0;
+  position: relative;
 }
-.inputBox label{
-    position: absolute;
-    top: -2px;
-    left: 0;
-    font-size: 1em;
-    color: black;
-    pointer-events: none;
-    transition: .5s;
+.inputBox label {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  font-size: 1em;
+  color: black;
+  pointer-events: none;
+  transition: 0.5s;
 }
 
-.inputBox input:focus ~ label, .inputBox input:valid ~ label{
-    top: -10px;
-    left: 0;
-    font-size: 0.8em;
+.inputBox input:focus ~ label,
+.inputBox input:valid ~ label {
+  top: -10px;
+  left: 0;
+  font-size: 0.8em;
 }
 
 .inputBox input {
@@ -209,5 +222,4 @@ h3 {
 .formLogin button:hover {
   background-color: #78a115;
 }
-
 </style>
