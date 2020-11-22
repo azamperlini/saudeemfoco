@@ -96,8 +96,8 @@ export default {
         password: '',
         retypePassword: '',
         statusPassword: false,
-        privacy: ''
-      }
+        privacy: '',
+      },
     };
   },
   methods: {
@@ -105,26 +105,26 @@ export default {
       const url = '/user';
       this.$http
         .post(url, this.user)
-        .then(response => {
+        .then((response) => {
           console.log(response.data);
           this.$router.push({ name: 'Login' });
         })
-        .catch(error => {
+        .catch((error) => {
           if (error) {
             this.checkUserName = true;
           } else {
             this.checkUserName = false;
           }
         });
-    }
+    },
   },
   computed: {
     checkPassword() {
       return this.user.password === this.user.retypePassword
         ? this.statusPassword
         : !this.statusPassword;
-    }
-  }
+    },
+  },
 };
 </script>
 
