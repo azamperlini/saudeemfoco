@@ -3,7 +3,7 @@
     <router-link to="/informative"><li>Informativos</li></router-link>
     <router-link to="/user"><li>Prontuário</li></router-link>
     <li class="welcome">Seja bem-vindo,<br><b>ALEXANDRE!</b></li>
-    <a href="/login"
+    <a href="#"
       @click.prevent="makeLogout"
     >
       <li class="btn-sair">Sair</li>
@@ -13,17 +13,17 @@
 
 <script>
 
+import { logoutMixin } from '../../mixins';
+
 export default {
   name: 'NavBarUser',
+  mixins: [logoutMixin],
   data() {
     return {
     };
   },
   methods: {
-    makeLogout() {
-      localStorage.removeItem('token');
-      this.$router.push({ name: 'Login' });
-    },
+
   },
   computed: {
   },

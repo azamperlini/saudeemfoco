@@ -47,47 +47,28 @@
 </template>
 
 <script>
+
+import { loginMixin } from '../../mixins';
+
 export default {
   name: 'Login',
+  mixins: [loginMixin],
   data() {
     return {
       user: {},
       checkLogin: false,
-      token: ''
+      token: '',
     };
   },
-  components: {},
-  methods: {
-    makeLogin() {
-      const url = '/login';
-      const urlSecondary = '/username';
-      this.$http
-        .post(url, this.user)
-        .then(response => {
-          this.token = response.headers.authorization;
-          console.log(response.headers.authorization);
-        })
-        .catch(error => {
-          if (error) {
-            this.checkLogin = true;
-          } else {
-            this.checkLogin = false;
-          }
-        });
-      this.$http
-        .get(urlSecondary)
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          if (error) {
-            console.log(error);
-          }
-        });
-      this.$router.push({ name: 'MedicalRecords' });
-    }
+  components: {
+
   },
-  computed: {}
+  methods: {
+
+  },
+  computed: {
+
+  },
 };
 </script>
 

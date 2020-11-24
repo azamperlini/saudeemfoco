@@ -1,24 +1,23 @@
 export const logoutMixin = {
   methods: {
-    efetuarLogout() {
+    makeLogout() {
       this.$store.commit('DESLOGAR_USUARIO');
-      this.$router.push({ name: 'login' });
+      this.$router.push({ name: 'Login' });
     },
   },
 };
 
 export const loginMixin = {
   methods: {
-    efetuarLogin() {
+    makeLogin() {
       const url = '/login';
-      this.$http.post(url, this.usuario)
+      this.$http
+        .post(url, this.user)
         .then((response) => {
           this.$store.state.token = response.headers.authorization;
-          this.$store.state.usuario = response.data.user;
-          console.log(this.$store.state.usuario);
-          console.log(this.$store.state.token);
           this.$router.push({ name: 'MedicalRecords' });
-        }).catch((error) => {
+        })
+        .catch((error) => {
           if (error) {
             this.checkLogin = true;
           } else {

@@ -8,7 +8,6 @@ const http = axios.create({
 http.interceptors.request.use((config) => {
   const { token } = provedor.state;
   if (token) {
-    console.log(config);
     /* eslint no-param-reassign: "error" */
     config.headers.Authorization = `Bearer ${token}`;
   }

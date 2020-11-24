@@ -9,9 +9,11 @@ const estado = {
 };
 
 const mutations = {
-  DEFINIR_USUARIO_LOGADO(state, { token, usuario }) {
-    state.usuario = usuario;
+  DEFINIR_ACESSO(state, { token }) {
     state.token = token;
+  },
+  DEFINIR_USUARIO_LOGADO(state, { usuario }) {
+    state.usuario = usuario;
   },
   DESLOGAR_USUARIO(state) {
     state.usuario = {};

@@ -65,9 +65,9 @@
 
 <script>
 
+import Carroussel from '@/components/carroussel/Carroussel.vue';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
-import Carroussel from '../components/Carroussel.vue';
 
 export default {
   name: 'Home',

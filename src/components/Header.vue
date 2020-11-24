@@ -6,9 +6,9 @@
           <img v-show="changeImage" alt="Quem Somos Logo" src="../assets/brand_whoAreYou_home.png">
           <img v-show="!changeImage" alt="Quem Somos Logo" src="../assets/brand_whoAreYou.png">
         </router-link>
-        <NavBarLogout />
-        <NavBarUser />
-        <NavBarHealthAgent />
+        <NavBarLogout v-if="permission === ''"/>
+        <NavBarUser v-else-if="permission === 'PÚBLICO'"/>
+        <NavBarHealthAgent v-if="permission !== '' && 'PÚBLICO'"/>
       </div>
     </div>
   </header>
@@ -24,12 +24,25 @@ export default {
   name: 'Header',
   data() {
     return {
+      permission: '',
     };
   },
   components: {
     NavBarLogout,
     NavBarUser,
     NavBarHealthAgent,
+  },
+  created() {
+    if (this.$store.state.token !== null) {
+      const url = '/user/username';
+      this.$http
+        .get(url)
+        .then((response) => {
+          this.$store.state.usuario = response.data.user;
+          this.permission = response.data.permission;
+          console.log(this.permission);
+        });
+    }
   },
   computed: {
     changeImage() {
@@ -71,13 +84,13 @@ header .content .nav {
   padding: 0;
 }
 
-.btn-register {
+.navBar .btn-register {
   border-right: 0;
   border-bottom: 4px solid #92cd01;
   border-radius: 0 0 15px 15px;
 }
 
-.btn-login {
+.navBar .btn-login {
   background-color: var(--verde-backgruond-color);
   border-radius: 10px;
   color: black;
@@ -88,7 +101,7 @@ header .content .nav {
   background-color: #78a115;
 }
 
-li {
+.navBar li {
   display: inline-block;
   margin: 0 0 0 30px;
   border-right: var(--padraobordacinza-border-right);
@@ -101,7 +114,7 @@ li {
   color: var(--txtblack70-color);
 }
 
-li:hover {
+.navBar li:hover {
   background-color: var(--black20-background-color);
   color: black;
   font-weight: bold;
