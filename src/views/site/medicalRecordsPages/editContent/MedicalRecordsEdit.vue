@@ -49,8 +49,14 @@
         </a>
       </div>
       <div class="form-body">
-        <FormPersonalData v-show="currentItem === 'personalData'" />
-        <FormAddress v-show="currentItem === 'address'" />
+        <FormPersonalData
+          v-show="currentItem === 'personalData'"
+          :user="user"
+          :dados="dados"/>
+        <FormAddress
+          v-show="currentItem === 'address'"
+          :user="user"
+          :dados="dados"/>
         <FormContact v-show="currentItem === 'contact'" />
         <FormBlood v-show="currentItem === 'blood'" />
         <FormAllergy v-show="currentItem === 'allergy'" />
@@ -74,7 +80,13 @@ export default {
   data() {
     return {
       currentItem: 'personalData',
+      dados: {},
     };
+  },
+  props: {
+    user: {
+      type: Object,
+    },
   },
   components: {
     FormPersonalData,
@@ -83,6 +95,17 @@ export default {
     FormBlood,
     FormAllergy,
     FormMedicineContinuours,
+  },
+  mounted() {
+    if (this.$store.state.token !== null) {
+      const url = '/user/username';
+      this.$http
+        .get(url)
+        .then((response) => {
+          this.dados = response.data;
+          console.log('=======USER ID==== PAI EDIT MEDICAL RECORDS EDIT', this.dados.id);
+        });
+    }
   },
   methods: {
     redirectTab(item) {

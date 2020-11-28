@@ -40,6 +40,7 @@ export default {
         .get(url)
         .then((response) => {
           this.$store.state.usuario = response.data.user;
+          console.log('id', this.$store.state.usuario);
           this.permission = response.data.permission;
           console.log(this.permission);
           this.user = response.data.firstName;

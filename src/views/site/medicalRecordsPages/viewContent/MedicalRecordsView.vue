@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="contentMedicalRecordsView">
-      <h2>{{ user.firstName + ' ' + user.lastName }}</h2>
+      <h2>{{ dados.firstName + ' ' + dados.lastName }}</h2>
       <table>
         <tr>
           <td class="tdLeft">Data de Nascimento:</td>
@@ -34,7 +34,7 @@
           <td class="tdRigth">20181044</td>
         </tr>
       </table>
-      <AccordionGeneralData />
+      <AccordionGeneralData :dados="dados" />
       <AccordionAllergy />
       <AccordionMedicineContinuours />
       <AccordionAddressContact />
@@ -57,15 +57,27 @@ export default {
     AccordionMedicineContinuours,
     AccordionAddressContact,
   },
-  props: {
-    user: {
-      type: Object,
-    },
-  },
+  // props: {
+  //   user: {
+  //     type: Object,
+  //   },
+  // },
   data() {
     return {
       permission: '',
+      dados: {},
     };
+  },
+  created() {
+    if (this.$store.state.token !== null) {
+      const url = '/user/username';
+      this.$http
+        .get(url)
+        .then((response) => {
+          this.dados = response.data;
+          console.log('user MEDICAL RECORDS VIEW', this.dados);
+        });
+    }
   },
 };
 </script>

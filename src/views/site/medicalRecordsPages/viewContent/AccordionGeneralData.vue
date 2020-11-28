@@ -48,10 +48,18 @@
 
 export default {
   name: 'AccordionGeneralData',
+  props: {
+    dados: {
+      type: Object,
+    },
+  },
   data() {
     return {
       isOpen: true,
     };
+  },
+  mounted() {
+    console.log('dados do usuário', this.dados);
   },
   methods: {
     toggleAccordion() {

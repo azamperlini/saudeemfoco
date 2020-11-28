@@ -29,8 +29,10 @@
         </div>
       </div>
         <MedicalRecordsAgenda v-show="currentItemContent === 'agenda'"/>
-        <MedicalRecordsEdit v-show="currentItemContent === 'editar prontuário'"/>
-        <MedicalRecordsView v-show="currentItemContent === 'visualizar prontuário'" :user="user"/>
+        <MedicalRecordsEdit
+          v-show="currentItemContent === 'editar prontuário'"
+          :user="user" />
+        <MedicalRecordsView v-show="currentItemContent === 'visualizar prontuário'"/>
     </main>
     <Footer />
   </div>

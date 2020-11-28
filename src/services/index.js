@@ -2,7 +2,7 @@ import axios from 'axios';
 import provedor from '@/provedor';
 
 const http = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: 'https://apisaude.herokuapp.com/',
 });
 
 http.interceptors.request.use((config) => {
