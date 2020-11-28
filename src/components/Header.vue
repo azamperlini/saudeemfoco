@@ -7,8 +7,8 @@
           <img v-show="!changeImage" alt="Quem Somos Logo" src="../assets/brand_whoAreYou.png">
         </router-link>
         <NavBarLogout v-if="permission === ''"/>
-        <NavBarUser v-else-if="permission === 'PÚBLICO'"/>
-        <NavBarHealthAgent v-if="permission !== '' && 'PÚBLICO'"/>
+        <NavBarUser v-if="permission === 'PÚBLICO'" :user="user"/>
+        <NavBarHealthAgent v-if="permission !== '' && 'PÚBLICO'" :user="user"/>
       </div>
     </div>
   </header>
@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       permission: '',
+      user: '',
     };
   },
   components: {
@@ -41,6 +42,7 @@ export default {
           this.$store.state.usuario = response.data.user;
           this.permission = response.data.permission;
           console.log(this.permission);
+          this.user = response.data.firstName;
         });
     }
   },

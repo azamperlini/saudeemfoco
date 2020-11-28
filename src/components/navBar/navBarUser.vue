@@ -1,8 +1,8 @@
 <template>
   <ul class="navBar">
-    <router-link to="/informative"><li>Informativos</li></router-link>
-    <router-link to="/user"><li>Prontuário</li></router-link>
-    <li class="welcome">Seja bem-vindo,<br><b>ALEXANDRE!</b></li>
+    <router-link to="/informativo"><li>Informativos</li></router-link>
+    <router-link to="/prontuario"><li>Prontuário</li></router-link>
+    <li class="welcome">Seja bem-vindo(a),<p class="upper">{{user}}!</p></li>
     <a href="#"
       @click.prevent="makeLogout"
     >
@@ -18,6 +18,11 @@ import { logoutMixin } from '../../mixins';
 export default {
   name: 'NavBarUser',
   mixins: [logoutMixin],
+  props: {
+    user: {
+      type: String,
+    },
+  },
   data() {
     return {
     };
@@ -42,6 +47,12 @@ export default {
   background-color: white;
   color: var(--txtblack70-color);
   font-weight: normal;
+}
+
+.upper {
+  margin: 0;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .navBar .btn-sair {

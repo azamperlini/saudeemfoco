@@ -68,7 +68,7 @@
             <p class="politics">
               <input type="checkbox" v-model="user.privacy" />
               Li e estou de acordo com a
-              <a href="/privacy"> Política de Privacidade e de Uso de Informações</a>.
+              <a href="/privacidade"> Política de Privacidade e de Uso de Informações</a>.
             </p>
             <button type="submit" v-if="!checkPassword">Cadastrar</button><br />
           </form>

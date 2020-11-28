@@ -54,4 +54,8 @@ export default {
 
 <style scoped>
 
+.carousel__item ul li img{
+  width: 100%;
+}
+
 </style>

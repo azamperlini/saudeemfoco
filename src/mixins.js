@@ -2,7 +2,7 @@ export const logoutMixin = {
   methods: {
     makeLogout() {
       this.$store.commit('DESLOGAR_USUARIO');
-      this.$router.push({ name: 'Login' });
+      this.$router.push({ name: 'Home' });
     },
   },
 };

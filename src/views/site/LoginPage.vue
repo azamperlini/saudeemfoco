@@ -18,7 +18,7 @@
                 oninput="setCustomValidity('')"
                 v-model="user.userName"
               />
-              <label>Username:</label>
+              <label>Usuário:</label>
             </div>
             <div class="inputBox">
               <input
@@ -35,7 +35,7 @@
             <button type="submit">Entrar</button><br />
           </form>
           <p><router-link to="#">Esqueceu a senha</router-link>?</p>
-          <p>Não tenho conta ainda. <router-link to="/register"> Criar conta</router-link>.</p>
+          <p>Não tenho conta ainda. <router-link to="/cadastro"> Criar conta</router-link>.</p>
           <div class="brandPartner">
             <img alt="Icone Parceiro" src="../../assets/login/brandPartner.png" />
           </div>

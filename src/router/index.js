@@ -16,27 +16,27 @@ const routes = [
     component: Home,
   },
   {
-    path: '/informative',
+    path: '/informativo',
     name: 'Informative',
     component: Informative,
   },
   {
-    path: '/user',
+    path: '/prontuario',
     name: 'MedicalRecords',
     component: MedicalRecords,
   },
   {
-    path: '/health-agent',
+    path: '/agente-de-saude',
     name: 'HealthAgent',
     component: HealthAgent,
   },
   {
-    path: '/privacy',
+    path: '/privacidade',
     name: 'Privacy',
     component: () => import('../views/site/PrivacyPage.vue'),
   },
   {
-    path: '/register',
+    path: '/cadastro',
     name: 'Register',
     component: Register,
   },
